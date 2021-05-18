@@ -5,21 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPhotoListBinding
 import com.juango.photoviewer.model.Photo
+import kotlinx.coroutines.launch
 
 class PhotoListFragment : Fragment() {
 
     private lateinit var binding: FragmentPhotoListBinding
     private val adapter by lazy { PhotoListAdapter(::onItemSelected) }
-//    private val repository by lazy { App.repository }
+    private val repository by lazy { App.repository }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPhotoListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -48,25 +51,12 @@ class PhotoListFragment : Fragment() {
         }
     }
 
-    private fun loadPhotos() {
-        val photos = listOf(
-            Photo(
-                1,
-                1,
-                "accusamus beatae ad facilis cum similique qui sunt",
-                "https://via.placeholder.com/600/92c952",
-                "https://via.placeholder.com/150/92c952"
-            ),
-            Photo(
-                1,
-                2,
-                "reprehenderit est deserunt velit ipsam",
-                "https://via.placeholder.com/600/771796",
-                "https://via.placeholder.com/150/771796"
-            )
-        )
+    private fun loadPhotos() = lifecycleScope.launch {
+        binding.pullToRefresh.isRefreshing = true
+
+        val photos = repository.getPhotos()
         adapter.setData(photos)
+
         binding.pullToRefresh.isRefreshing = false
     }
-
 }
