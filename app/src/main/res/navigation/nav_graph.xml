@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/photoListFragment">
+
+    <fragment
+        android:id="@+id/photoDetailFragment"
+        android:name="com.juango.photoviewer.ui.photodetail.PhotoDetailFragment"
+        android:label="fragment_photo_detail"
+        tools:layout="@layout/fragment_photo_detail">
+        <action
+            android:id="@+id/action_photoDetailFragment_to_photoListFragment"
+            app:destination="@id/photoListFragment" />
+        <argument
+            android:name="idPost"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoListFragment"
+        android:name="com.juango.photoviewer.ui.photolist.PhotoListFragment"
+        android:label="List of photos"
+        tools:layout="@layout/fragment_photo_list">
+        <action
+            android:id="@+id/action_photoListFragment_to_photoDetailFragment"
+            app:destination="@id/photoDetailFragment" />
+    </fragment>
+</navigation>
