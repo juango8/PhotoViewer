@@ -18,9 +18,8 @@ class PhotoListAdapter(
 
         fun bind(photo: Photo, onItemSelected: (Photo) -> Unit) {
             this.photo = photo
-            val context = this.itemView.context
             binding.title.text = photo.title
-            setImageByGlide(photo, context, binding.photoImage)
+            binding.photoImage.setImageByGlide(photo.thumbnailUrl)
             binding.root.setOnClickListener { onItemSelected(photo) }
         }
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPhotoListBinding
@@ -40,7 +41,8 @@ class PhotoListFragment : Fragment() {
     private fun initUi() {
         binding.pullToRefresh.setOnRefreshListener { loadPhotos() }
         binding.photoRecyclerView.adapter = adapter
-        binding.photoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.photoRecyclerView.layoutManager =
+            GridLayoutManager(requireContext(), 2, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun onItemSelected(item: Photo) {

@@ -13,7 +13,7 @@ fun buildClient(): OkHttpClient =
     OkHttpClient.Builder()
         .build()
 
-@ExperimentalSerializationApi
+
 fun buildRetrofit(): Retrofit {
     val contentType = "application/json".toMediaType()
 
@@ -24,6 +24,5 @@ fun buildRetrofit(): Retrofit {
         .build()
 }
 
-@ExperimentalSerializationApi
 fun buildApiService(): RemoteApiService =
     buildRetrofit().create(RemoteApiService::class.java)

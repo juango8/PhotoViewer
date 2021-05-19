@@ -17,10 +17,8 @@ class App : Application() {
             PhotoViewerDatabase.buildDatabase(instance)
         }
 
-        @ExperimentalSerializationApi
         private val apiService by lazy { buildApiService() }
 
-        @ExperimentalSerializationApi
         val remoteApi by lazy { RemoteApi(apiService) }
 
         val repository: PhotoViewerRepository by lazy {

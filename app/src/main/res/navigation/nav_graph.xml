@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/photoDetailFragment"
         android:name="com.juango.photoviewer.ui.photodetail.PhotoDetailFragment"
-        android:label="fragment_photo_detail"
+        android:label="Photo Detail"
         tools:layout="@layout/fragment_photo_detail">
         <action
             android:id="@+id/action_photoDetailFragment_to_photoListFragment"
