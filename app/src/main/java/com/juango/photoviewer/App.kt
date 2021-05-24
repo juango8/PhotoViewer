@@ -6,7 +6,6 @@ import com.juango.photoviewer.networking.RemoteApi
 import com.juango.photoviewer.networking.buildApiService
 import com.juango.photoviewer.repository.PhotoViewerRepository
 import com.juango.photoviewer.repository.PhotoViewerRepositoryImpl
-import kotlinx.serialization.ExperimentalSerializationApi
 
 class App : Application() {
 
@@ -19,7 +18,7 @@ class App : Application() {
 
         private val apiService by lazy { buildApiService() }
 
-        val remoteApi by lazy { RemoteApi(apiService) }
+        private val remoteApi by lazy { RemoteApi(apiService) }
 
         val repository: PhotoViewerRepository by lazy {
             PhotoViewerRepositoryImpl(
