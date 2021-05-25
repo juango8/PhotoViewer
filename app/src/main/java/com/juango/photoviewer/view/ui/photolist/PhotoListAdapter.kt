@@ -1,10 +1,10 @@
-package com.juango.photoviewer.ui.photolist
+package com.juango.photoviewer.view.ui.photolist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.juango.photoviewer.databinding.ListItemPhotoBinding
-import com.juango.photoviewer.model.Photo
+import com.juango.photoviewer.service.model.Photo
 import com.juango.photoviewer.utils.setImageByGlide
 
 class PhotoListAdapter(

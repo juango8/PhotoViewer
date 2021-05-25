@@ -16,7 +16,7 @@
         android:theme="@style/Theme.PhotoViewer"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.juango.photoviewer.view.ui.MainActivity"
             android:theme="@style/Theme.PhotoViewer.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

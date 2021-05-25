@@ -1,4 +1,4 @@
-package com.juango.photoviewer.ui.photolist
+package com.juango.photoviewer.view.ui.photolist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPhotoListBinding
-import com.juango.photoviewer.model.Photo
+import com.juango.photoviewer.service.model.Photo
 import kotlinx.coroutines.launch
 
 class PhotoListFragment : Fragment() {

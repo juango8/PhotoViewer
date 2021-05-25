@@ -1,12 +1,12 @@
-package com.juango.photoviewer.repository
+package com.juango.photoviewer.service.repository
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.juango.photoviewer.database.dao.PhotoDao
-import com.juango.photoviewer.model.Photo
-import com.juango.photoviewer.model.Success
-import com.juango.photoviewer.networking.NetworkStatusChecker
-import com.juango.photoviewer.networking.RemoteApi
+import com.juango.photoviewer.service.database.dao.PhotoDao
+import com.juango.photoviewer.service.model.Photo
+import com.juango.photoviewer.service.model.Success
+import com.juango.photoviewer.service.networking.NetworkStatusChecker
+import com.juango.photoviewer.service.networking.RemoteApi
 
 class PhotoViewerRepositoryImpl(
     private val context: Context,

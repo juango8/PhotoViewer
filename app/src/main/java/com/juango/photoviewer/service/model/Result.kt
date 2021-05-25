@@ -1,4 +1,4 @@
-package com.juango.photoviewer.model
+package com.juango.photoviewer.service.model
 
 sealed class Result<out T : Any>
 

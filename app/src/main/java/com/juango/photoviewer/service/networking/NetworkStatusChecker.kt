@@ -1,4 +1,4 @@
-package com.juango.photoviewer.networking
+package com.juango.photoviewer.service.networking
 
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities

@@ -1,4 +1,4 @@
-package com.juango.photoviewer.ui
+package com.juango.photoviewer.view.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

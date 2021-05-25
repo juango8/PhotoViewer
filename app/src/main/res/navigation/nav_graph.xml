@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/photoDetailFragment"
-        android:name="com.juango.photoviewer.ui.photodetail.PhotoDetailFragment"
+        android:name="com.juango.photoviewer.view.ui.photodetail.PhotoDetailFragment"
         android:label="Photo Detail"
         tools:layout="@layout/fragment_photo_detail">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/photoListFragment"
-        android:name="com.juango.photoviewer.ui.photolist.PhotoListFragment"
+        android:name="com.juango.photoviewer.view.ui.photolist.PhotoListFragment"
         android:label="List of photos"
         tools:layout="@layout/fragment_photo_list">
         <action

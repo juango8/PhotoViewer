@@ -1,4 +1,4 @@
-package com.juango.photoviewer.ui.photodetail
+package com.juango.photoviewer.view.ui.photodetail
 
 import android.os.Bundle
 import android.view.LayoutInflater

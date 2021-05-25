@@ -1,11 +1,11 @@
 package com.juango.photoviewer
 
 import android.app.Application
-import com.juango.photoviewer.database.PhotoViewerDatabase
-import com.juango.photoviewer.networking.RemoteApi
-import com.juango.photoviewer.networking.buildApiService
-import com.juango.photoviewer.repository.PhotoViewerRepository
-import com.juango.photoviewer.repository.PhotoViewerRepositoryImpl
+import com.juango.photoviewer.service.database.PhotoViewerDatabase
+import com.juango.photoviewer.service.networking.RemoteApi
+import com.juango.photoviewer.service.networking.buildApiService
+import com.juango.photoviewer.service.repository.PhotoViewerRepository
+import com.juango.photoviewer.service.repository.PhotoViewerRepositoryImpl
 
 class App : Application() {
 
