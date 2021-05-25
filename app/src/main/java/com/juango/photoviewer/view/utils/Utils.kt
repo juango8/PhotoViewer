@@ -1,4 +1,4 @@
-package com.juango.photoviewer.utils
+package com.juango.photoviewer.view.utils
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

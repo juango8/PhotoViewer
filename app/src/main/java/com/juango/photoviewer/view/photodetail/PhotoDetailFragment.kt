@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPhotoDetailBinding
-import com.juango.photoviewer.utils.setImageByGlide
+import com.juango.photoviewer.view.utils.setImageByGlide
 import kotlinx.coroutines.launch
 
 class PhotoDetailFragment : Fragment() {

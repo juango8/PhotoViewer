@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.juango.photoviewer.databinding.ListItemPhotoBinding
 import com.juango.photoviewer.service.model.Photo
-import com.juango.photoviewer.utils.setImageByGlide
+import com.juango.photoviewer.view.utils.setImageByGlide
 
 class PhotoListAdapter(
     private val onItemSelected: (Photo) -> Unit
