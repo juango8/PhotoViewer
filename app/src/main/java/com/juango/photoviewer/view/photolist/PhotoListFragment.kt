@@ -1,4 +1,4 @@
-package com.juango.photoviewer.view.ui.photolist
+package com.juango.photoviewer.view.photolist
 
 import android.os.Bundle
 import android.view.LayoutInflater
