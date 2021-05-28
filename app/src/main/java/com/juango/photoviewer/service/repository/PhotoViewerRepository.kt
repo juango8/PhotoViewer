@@ -1,6 +1,6 @@
-package com.juango.photoviewer.repository
+package com.juango.photoviewer.service.repository
 
-import com.juango.photoviewer.model.Photo
+import com.juango.photoviewer.service.model.Photo
 
 interface PhotoViewerRepository {
 

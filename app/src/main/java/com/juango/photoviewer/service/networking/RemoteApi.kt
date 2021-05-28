@@ -1,9 +1,9 @@
-package com.juango.photoviewer.networking
+package com.juango.photoviewer.service.networking
 
-import com.juango.photoviewer.model.Failure
-import com.juango.photoviewer.model.Photo
-import com.juango.photoviewer.model.Result
-import com.juango.photoviewer.model.Success
+import com.juango.photoviewer.service.model.Failure
+import com.juango.photoviewer.service.model.Photo
+import com.juango.photoviewer.service.model.Result
+import com.juango.photoviewer.service.model.Success
 
 class RemoteApi(private val apiService: RemoteApiService) {
 

@@ -1,6 +1,6 @@
-package com.juango.photoviewer.networking
+package com.juango.photoviewer.service.networking
 
-import com.juango.photoviewer.model.Photo
+import com.juango.photoviewer.service.model.Photo
 import retrofit2.http.GET
 
 interface RemoteApiService {

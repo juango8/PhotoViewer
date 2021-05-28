@@ -1,11 +1,11 @@
-package com.juango.photoviewer.database
+package com.juango.photoviewer.service.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.juango.photoviewer.database.dao.PhotoDao
-import com.juango.photoviewer.model.Photo
+import com.juango.photoviewer.service.database.dao.PhotoDao
+import com.juango.photoviewer.service.model.Photo
 
 const val DATABASE_VERSION = 1
 
