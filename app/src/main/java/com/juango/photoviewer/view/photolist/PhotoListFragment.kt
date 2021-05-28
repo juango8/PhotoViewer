@@ -41,6 +41,12 @@ class PhotoListFragment : Fragment() {
         initUi()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        if (::viewModel.isInitialized)
+            viewModel.saveState()
+        super.onSaveInstanceState(outState)
+    }
+
     private fun initUi() {
         binding.pullToRefresh.setOnRefreshListener { loadPhotos() }
         binding.photoRecyclerView.adapter = adapter

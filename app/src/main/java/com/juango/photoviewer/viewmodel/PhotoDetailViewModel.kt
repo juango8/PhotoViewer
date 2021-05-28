@@ -1,24 +1,33 @@
 package com.juango.photoviewer.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.juango.photoviewer.App
 import com.juango.photoviewer.service.model.Photo
 import kotlinx.coroutines.launch
 
-class PhotoDetailViewModel : ViewModel() {
+class PhotoDetailViewModel(private val state: SavedStateHandle) : ViewModel() {
+
+    companion object {
+        private const val PHOTO_DETAIL_KEY = "photoDetail"
+    }
 
     private val repository by lazy { App.repository }
 
     private val photoLiveData = MutableLiveData<Photo>()
 
-    fun getPhotoLiveData(): LiveData<Photo> = photoLiveData
-
     fun loadDataFromRepository(idPost: Int) {
         viewModelScope.launch {
             photoLiveData.postValue(repository.getPhotoById(idPost.toString()))
         }
+    }
+
+    fun getPhotoLiveData(): LiveData<Photo> =
+        if (state.contains(PHOTO_DETAIL_KEY)) {
+            state.getLiveData(PHOTO_DETAIL_KEY)
+        } else
+            photoLiveData
+
+    fun saveState() {
+        state.set(PHOTO_DETAIL_KEY, getPhotoLiveData().value)
     }
 }

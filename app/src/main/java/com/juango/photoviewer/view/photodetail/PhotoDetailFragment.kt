@@ -12,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import com.juango.photoviewer.databinding.FragmentPhotoDetailBinding
 import com.juango.photoviewer.view.utils.setImageByGlide
 import com.juango.photoviewer.viewmodel.PhotoDetailViewModel
-import com.juango.photoviewer.viewmodel.PhotoDetailViewModelFactory
 
 class PhotoDetailFragment : Fragment() {
 
@@ -40,6 +39,12 @@ class PhotoDetailFragment : Fragment() {
         initUi()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        if (::viewModel.isInitialized)
+            viewModel.saveState()
+        super.onSaveInstanceState(outState)
+    }
+
     private fun initUi() {
         viewModel.getPhotoLiveData().observe(this as LifecycleOwner, { photo ->
             photo?.let {
@@ -50,8 +55,7 @@ class PhotoDetailFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val factory = PhotoDetailViewModelFactory()
-        viewModel = ViewModelProvider(this, factory).get(PhotoDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PhotoDetailViewModel::class.java)
     }
 
 }
