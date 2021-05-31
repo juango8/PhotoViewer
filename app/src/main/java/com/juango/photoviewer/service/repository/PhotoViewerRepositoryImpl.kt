@@ -3,6 +3,7 @@ package com.juango.photoviewer.service.repository
 import android.content.Context
 import android.net.ConnectivityManager
 import com.juango.photoviewer.service.database.dao.PhotoDao
+import com.juango.photoviewer.service.model.Album
 import com.juango.photoviewer.service.model.Photo
 import com.juango.photoviewer.service.model.Success
 import com.juango.photoviewer.service.networking.NetworkStatusChecker
@@ -33,5 +34,9 @@ class PhotoViewerRepositoryImpl(
     }
 
     override suspend fun getPhotoById(photoId: String): Photo = photoDao.getPhotoById(photoId)
+
+    override suspend fun getAlbums(): List<Album> {
+        return emptyList()
+    }
 
 }
