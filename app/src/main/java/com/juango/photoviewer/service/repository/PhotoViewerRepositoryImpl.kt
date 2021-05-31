@@ -2,6 +2,7 @@ package com.juango.photoviewer.service.repository
 
 import android.content.Context
 import android.net.ConnectivityManager
+import com.juango.photoviewer.service.database.dao.AlbumDao
 import com.juango.photoviewer.service.database.dao.PhotoDao
 import com.juango.photoviewer.service.model.Album
 import com.juango.photoviewer.service.model.Photo
@@ -12,6 +13,7 @@ import com.juango.photoviewer.service.networking.RemoteApi
 class PhotoViewerRepositoryImpl(
     private val context: Context,
     private val photoDao: PhotoDao,
+    private val albumDao: AlbumDao,
     private val remoteApi: RemoteApi,
 
     ) : PhotoViewerRepository {

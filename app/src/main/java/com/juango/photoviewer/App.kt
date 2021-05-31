@@ -24,6 +24,7 @@ class App : Application() {
             PhotoViewerRepositoryImpl(
                 instance,
                 database.photoDao(),
+                database.albumDao(),
                 remoteApi
             )
         }
