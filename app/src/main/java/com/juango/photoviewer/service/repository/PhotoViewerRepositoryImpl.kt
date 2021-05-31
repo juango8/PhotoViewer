@@ -7,6 +7,7 @@ import com.juango.photoviewer.service.database.dao.PhotoDao
 import com.juango.photoviewer.service.model.Album
 import com.juango.photoviewer.service.model.Photo
 import com.juango.photoviewer.service.model.Success
+import com.juango.photoviewer.service.model.relations.PhotoAndAlbum
 import com.juango.photoviewer.service.networking.NetworkStatusChecker
 import com.juango.photoviewer.service.networking.RemoteApi
 
@@ -38,7 +39,23 @@ class PhotoViewerRepositoryImpl(
     override suspend fun getPhotoById(photoId: String): Photo = photoDao.getPhotoById(photoId)
 
     override suspend fun getAlbums(): List<Album> {
-        return emptyList()
+        if (networkStatusChecker.hasInternetConnection()) {
+            val result = remoteApi.getAlbums()
+            if (result is Success) {
+                val onlyTwo = result.data.slice(0..1)
+                onlyTwo.forEach {
+                    albumDao.addAlbum(it)
+                }
+            }
+        }
+        return albumDao.getAlbums()
     }
+
+    override suspend fun getPhotosByAlbum(albumId: String): List<PhotoAndAlbum> =
+        albumDao.getPhotosByAlbum(albumId).let { photosByAlbum ->
+            val photos = photosByAlbum.photos ?: return emptyList()
+
+            return photos.map { PhotoAndAlbum(it, photosByAlbum.album) }
+        }
 
 }

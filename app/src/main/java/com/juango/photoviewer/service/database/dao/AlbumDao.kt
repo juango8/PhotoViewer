@@ -1,10 +1,8 @@
 package com.juango.photoviewer.service.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.juango.photoviewer.service.model.Album
+import com.juango.photoviewer.service.model.relations.PhotosByAlbum
 
 @Dao
 interface AlbumDao {
@@ -15,4 +13,7 @@ interface AlbumDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAlbum(album: Album)
 
+    @Transaction
+    @Query("SELECT * FROM album WHERE id = :albumId")
+    suspend fun getPhotosByAlbum(albumId: String): PhotosByAlbum
 }
