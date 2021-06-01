@@ -23,9 +23,9 @@ class PhotoViewerRepositoryImpl(
         NetworkStatusChecker(context.getSystemService(ConnectivityManager::class.java))
     }
 
-    override suspend fun getPhotos(): List<Photo> {
+    override suspend fun getPhotos(albumId: String): List<Photo> {
         if (networkStatusChecker.hasInternetConnection()) {
-            val result = remoteApi.getPhotos()
+            val result = remoteApi.getPhotos(albumId)
             if (result is Success) {
                 val firstTwentyFive = result.data.slice(0..24)
                 firstTwentyFive.forEach {
@@ -51,11 +51,14 @@ class PhotoViewerRepositoryImpl(
         return albumDao.getAlbums()
     }
 
-    override suspend fun getPhotosByAlbum(albumId: String): List<PhotoAndAlbum> =
+    override suspend fun getPhotosByAlbum(albumId: String): List<PhotoAndAlbum> {
+        getPhotos(albumId)
+        getAlbums()
         albumDao.getPhotosByAlbum(albumId).let { photosByAlbum ->
             val photos = photosByAlbum.photos ?: return emptyList()
 
             return photos.map { PhotoAndAlbum(it, photosByAlbum.album) }
         }
+    }
 
 }

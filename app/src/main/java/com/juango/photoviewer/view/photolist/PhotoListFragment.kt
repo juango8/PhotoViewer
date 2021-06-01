@@ -13,9 +13,23 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juango.photoviewer.databinding.FragmentPhotoListBinding
 import com.juango.photoviewer.service.model.Photo
+import com.juango.photoviewer.view.ViewPagerFragmentDirections
 import com.juango.photoviewer.viewmodel.PhotoListViewModel
 
 class PhotoListFragment : Fragment() {
+
+    companion object {
+        const val ARG_POSITION = "position"
+
+        fun getInstance(position: Int): Fragment {
+            val photoListFragment = PhotoListFragment()
+            val bundle = Bundle()
+            bundle.putInt(ARG_POSITION, position)
+            photoListFragment.arguments = bundle
+            return photoListFragment
+        }
+    }
+
 
     private lateinit var binding: FragmentPhotoListBinding
     private val adapter by lazy { PhotoListAdapter(::onItemSelected) }
@@ -23,6 +37,8 @@ class PhotoListFragment : Fragment() {
 
     init {
         lifecycleScope.launchWhenStarted {
+            val albumId = requireArguments().getInt(ARG_POSITION) + 1
+            viewModel.loadPhotoListFromRepository(albumId.toString())
             loadPhotos()
         }
     }
@@ -73,7 +89,7 @@ class PhotoListFragment : Fragment() {
     private fun onItemSelected(item: Photo) {
         view?.let {
             val action =
-                PhotoListFragmentDirections.actionPhotoListFragmentToPhotoDetailFragment(item.id)
+                ViewPagerFragmentDirections.actionPhotoListFragmentToPhotoDetailFragment(item.id)
             NavHostFragment.findNavController(this).navigate(action)
         }
     }

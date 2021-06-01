@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.juango.photoviewer.databinding.ListItemPhotoBinding
 import com.juango.photoviewer.service.model.Photo
+import com.juango.photoviewer.service.model.relations.PhotoAndAlbum
 import com.juango.photoviewer.view.utils.setImageByGlide
 
 class PhotoListAdapter(
@@ -25,7 +26,7 @@ class PhotoListAdapter(
 
     }
 
-    private val photos: MutableList<Photo> = mutableListOf()
+    private val photos: MutableList<PhotoAndAlbum> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ListItemPhotoBinding
@@ -34,12 +35,12 @@ class PhotoListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(photos[position], onItemSelected)
+        holder.bind(photos[position].photo, onItemSelected)
     }
 
     override fun getItemCount() = photos.size
 
-    fun setData(data: List<Photo>) {
+    fun setData(data: List<PhotoAndAlbum>) {
         this.photos.clear()
         this.photos.addAll(data)
         notifyDataSetChanged()

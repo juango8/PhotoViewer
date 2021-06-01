@@ -2,7 +2,7 @@ package com.juango.photoviewer.viewmodel
 
 import androidx.lifecycle.*
 import com.juango.photoviewer.App
-import com.juango.photoviewer.service.model.Photo
+import com.juango.photoviewer.service.model.relations.PhotoAndAlbum
 import kotlinx.coroutines.launch
 
 class PhotoListViewModel(private val state: SavedStateHandle) : ViewModel() {
@@ -13,19 +13,15 @@ class PhotoListViewModel(private val state: SavedStateHandle) : ViewModel() {
 
     private val repository by lazy { App.repository }
 
-    private val photoListLiveData = MutableLiveData<List<Photo>>()
+    private val photoListLiveData = MutableLiveData<List<PhotoAndAlbum>>()
 
-    init {
-        loadPhotoListFromRepository()
-    }
-
-    private fun loadPhotoListFromRepository() {
+    fun loadPhotoListFromRepository(albumId: String) {
         viewModelScope.launch {
-            photoListLiveData.postValue(repository.getPhotos())
+            photoListLiveData.postValue(repository.getPhotosByAlbum(albumId))
         }
     }
 
-    fun getPhotoListLiveData(): LiveData<List<Photo>> =
+    fun getPhotoListLiveData(): LiveData<List<PhotoAndAlbum>> =
         if (state.contains(PHOTO_LIST_KEY)) {
             state.getLiveData(PHOTO_LIST_KEY)
         } else

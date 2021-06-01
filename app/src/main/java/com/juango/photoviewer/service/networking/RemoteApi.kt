@@ -4,9 +4,9 @@ import com.juango.photoviewer.service.model.*
 
 class RemoteApi(private val apiService: RemoteApiService) {
 
-    suspend fun getPhotos(): Result<List<Photo>> =
+    suspend fun getPhotos(albumId: String): Result<List<Photo>> =
         try {
-            val data = apiService.getPhotos()
+            val data = apiService.getPhotos(albumId)
             Success(data)
         } catch (error: Throwable) {
             Failure(error)

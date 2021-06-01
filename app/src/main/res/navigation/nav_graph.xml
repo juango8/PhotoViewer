@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/photoListFragment">
+    app:startDestination="@id/viewPagerFragment">
 
     <fragment
         android:id="@+id/photoDetailFragment"
@@ -12,17 +12,17 @@
         tools:layout="@layout/fragment_photo_detail">
         <action
             android:id="@+id/action_photoDetailFragment_to_photoListFragment"
-            app:destination="@id/photoListFragment" />
+            app:destination="@id/viewPagerFragment" />
         <argument
             android:name="idPost"
             android:defaultValue="0"
             app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/photoListFragment"
-        android:name="com.juango.photoviewer.view.photolist.PhotoListFragment"
-        android:label="List of photos"
-        tools:layout="@layout/fragment_photo_list">
+        android:id="@+id/viewPagerFragment"
+        android:name="com.juango.photoviewer.view.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager">
         <action
             android:id="@+id/action_photoListFragment_to_photoDetailFragment"
             app:destination="@id/photoDetailFragment" />
