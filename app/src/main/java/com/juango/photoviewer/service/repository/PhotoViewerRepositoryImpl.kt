@@ -15,6 +15,9 @@ import com.juango.photoviewer.service.networking.NetworkStatusChecker
 import com.juango.photoviewer.service.networking.RemoteApi
 import com.juango.photoviewer.view.utils.getBitmapFromGlideURL
 import com.juango.photoviewer.viewmodel.PhotoDetailViewModel.Companion.FILE_AUTHORITY
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -69,16 +72,18 @@ class PhotoViewerRepositoryImpl(
         }
     }
 
-    override fun saveImageInCache(photo: Photo): Uri {
+    override suspend fun saveImageInCache(photo: Photo): Uri {
         val bitmap = getBitmapFromGlideURL(photo.url, context)
         val file = File(context.cacheDir.absolutePath, "test.jpg")
-        try {
-            val out: OutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
-            out.flush()
-            out.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val out: OutputStream = FileOutputStream(file)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+                out.flush()
+                out.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
         return FileProvider.getUriForFile(context, FILE_AUTHORITY, file)
     }

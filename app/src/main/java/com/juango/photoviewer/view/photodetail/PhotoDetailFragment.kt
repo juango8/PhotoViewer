@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.juango.photoviewer.databinding.FragmentPhotoDetailBinding
 import com.juango.photoviewer.view.utils.setImageByGlide
 import com.juango.photoviewer.viewmodel.PhotoDetailViewModel
+import kotlinx.coroutines.launch
 
 class PhotoDetailFragment : Fragment() {
 
@@ -67,16 +68,19 @@ class PhotoDetailFragment : Fragment() {
     }
 
     private fun shareImage() {
-        val uri = viewModel.createImageOnCache()
-        uri.let {
-            val shareIntent = Intent()
-            shareIntent.action = Intent.ACTION_SEND
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "Image selected.")
-            shareIntent.putExtra(Intent.EXTRA_STREAM, it)
-            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            shareIntent.type = "image/*"
-            startActivity(Intent.createChooser(shareIntent, "Share..."))
+        lifecycleScope.launch {
+            val uri = viewModel.createImageOnCache()
+            uri.let {
+                val shareIntent = Intent()
+                shareIntent.action = Intent.ACTION_SEND
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Image selected.")
+                shareIntent.putExtra(Intent.EXTRA_STREAM, it)
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                shareIntent.type = "image/*"
+                startActivity(Intent.createChooser(shareIntent, "Share..."))
+            }
         }
+
     }
 
 }

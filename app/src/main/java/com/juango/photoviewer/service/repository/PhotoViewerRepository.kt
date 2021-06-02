@@ -17,6 +17,6 @@ interface PhotoViewerRepository {
 
     suspend fun getPhotosByAlbum(albumId: String): List<PhotoAndAlbum>
 
-    fun saveImageInCache(photo: Photo): Uri
+    suspend fun saveImageInCache(photo: Photo): Uri
 
 }

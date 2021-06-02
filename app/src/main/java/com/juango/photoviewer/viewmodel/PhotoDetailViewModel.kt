@@ -33,7 +33,7 @@ class PhotoDetailViewModel(private val state: SavedStateHandle) : ViewModel() {
         state.set(PHOTO_DETAIL_KEY, getPhotoLiveData().value)
     }
 
-    fun createImageOnCache(): Uri {
+    suspend fun createImageOnCache(): Uri {
         return repository.saveImageInCache(photoLiveData.value!!)
     }
 }
