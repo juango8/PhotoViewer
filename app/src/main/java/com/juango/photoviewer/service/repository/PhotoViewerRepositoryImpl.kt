@@ -2,11 +2,9 @@ package com.juango.photoviewer.service.repository
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.Uri
 import androidx.core.content.FileProvider
-import com.juango.photoviewer.R
 import com.juango.photoviewer.service.database.dao.AlbumDao
 import com.juango.photoviewer.service.database.dao.PhotoDao
 import com.juango.photoviewer.service.model.Album
@@ -15,6 +13,7 @@ import com.juango.photoviewer.service.model.Success
 import com.juango.photoviewer.service.model.relations.PhotoAndAlbum
 import com.juango.photoviewer.service.networking.NetworkStatusChecker
 import com.juango.photoviewer.service.networking.RemoteApi
+import com.juango.photoviewer.view.utils.getBitmapFromGlideURL
 import com.juango.photoviewer.viewmodel.PhotoDetailViewModel.Companion.FILE_AUTHORITY
 import java.io.File
 import java.io.FileOutputStream
@@ -71,7 +70,7 @@ class PhotoViewerRepositoryImpl(
     }
 
     override fun saveImageInCache(photo: Photo): Uri {
-        val bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.ic_android_red)
+        val bitmap = getBitmapFromGlideURL(photo.url, context)
         val file = File(context.cacheDir.absolutePath, "test.jpg")
         try {
             val out: OutputStream = FileOutputStream(file)

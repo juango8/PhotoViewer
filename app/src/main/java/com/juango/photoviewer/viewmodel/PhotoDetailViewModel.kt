@@ -34,8 +34,6 @@ class PhotoDetailViewModel(private val state: SavedStateHandle) : ViewModel() {
     }
 
     fun createImageOnCache(): Uri {
-        var uri = Uri.EMPTY
-        photoLiveData.value?.let { uri = repository.saveImageInCache(it) }
-        return uri
+        return repository.saveImageInCache(photoLiveData.value!!)
     }
 }

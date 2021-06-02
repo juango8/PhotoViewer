@@ -68,12 +68,15 @@ class PhotoDetailFragment : Fragment() {
 
     private fun shareImage() {
         val uri = viewModel.createImageOnCache()
-        val shareIntent = Intent()
-        shareIntent.action = Intent.ACTION_SEND
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "Image selected.")
-        shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
-        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        shareIntent.type = "image/*"
-        startActivity(Intent.createChooser(shareIntent, "Share..."))
+        uri.let {
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Image selected.")
+            shareIntent.putExtra(Intent.EXTRA_STREAM, it)
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            shareIntent.type = "image/*"
+            startActivity(Intent.createChooser(shareIntent, "Share..."))
+        }
     }
+
 }
