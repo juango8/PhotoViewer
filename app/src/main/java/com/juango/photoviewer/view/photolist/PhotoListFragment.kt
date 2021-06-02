@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juango.photoviewer.databinding.FragmentPhotoListBinding
 import com.juango.photoviewer.service.model.Photo
-import com.juango.photoviewer.view.ViewPagerFragmentDirections
+import com.juango.photoviewer.view.viewpager.ViewPagerFragmentDirections
+
 import com.juango.photoviewer.viewmodel.PhotoListViewModel
 
 class PhotoListFragment : Fragment() {

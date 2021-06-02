@@ -1,4 +1,4 @@
-package com.juango.photoviewer.view
+package com.juango.photoviewer.view.viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

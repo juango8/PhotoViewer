@@ -1,5 +1,6 @@
 package com.juango.photoviewer.view.photodetail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,7 @@ class PhotoDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
+        initListeners()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -54,8 +56,24 @@ class PhotoDetailFragment : Fragment() {
         })
     }
 
+    private fun initListeners() {
+        binding.imageButton.setOnClickListener {
+            shareImage()
+        }
+    }
+
     private fun initViewModel() {
         viewModel = ViewModelProvider(this).get(PhotoDetailViewModel::class.java)
     }
 
+    private fun shareImage() {
+        val uri = viewModel.createImageOnCache()
+        val shareIntent = Intent()
+        shareIntent.action = Intent.ACTION_SEND
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Image selected.")
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        shareIntent.type = "image/*"
+        startActivity(Intent.createChooser(shareIntent, "Share..."))
+    }
 }

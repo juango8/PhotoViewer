@@ -1,4 +1,4 @@
-package com.juango.photoviewer.view
+package com.juango.photoviewer.view.viewpager
 
 import android.os.Bundle
 import android.view.LayoutInflater

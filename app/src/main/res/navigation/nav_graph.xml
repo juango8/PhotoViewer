@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.juango.photoviewer.view.ViewPagerFragment"
+        android:name="com.juango.photoviewer.view.viewpager.ViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager">
         <action

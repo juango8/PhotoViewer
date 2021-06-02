@@ -1,5 +1,6 @@
 package com.juango.photoviewer.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.*
 import com.juango.photoviewer.App
 import com.juango.photoviewer.service.model.Photo
@@ -9,6 +10,7 @@ class PhotoDetailViewModel(private val state: SavedStateHandle) : ViewModel() {
 
     companion object {
         private const val PHOTO_DETAIL_KEY = "photoDetail"
+        const val FILE_AUTHORITY = "com.juango.photoviewer.fileprovider"
     }
 
     private val repository by lazy { App.repository }
@@ -29,5 +31,11 @@ class PhotoDetailViewModel(private val state: SavedStateHandle) : ViewModel() {
 
     fun saveState() {
         state.set(PHOTO_DETAIL_KEY, getPhotoLiveData().value)
+    }
+
+    fun createImageOnCache(): Uri {
+        var uri = Uri.EMPTY
+        photoLiveData.value?.let { uri = repository.saveImageInCache(it) }
+        return uri
     }
 }
