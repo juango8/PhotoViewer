@@ -18,7 +18,7 @@ class PhotoListViewModel(
 
     private val photoListLiveData = MutableLiveData<List<PhotoAndAlbum>>()
 
-    fun loadPhotoListFromRepository(albumId: String) {
+    fun loadPhotoList(albumId: String) {
         viewModelScope.launch {
             photoListLiveData.postValue(repository.getPhotosByAlbum(albumId))
         }

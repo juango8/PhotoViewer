@@ -20,7 +20,7 @@ class PhotoDetailViewModel(
 
     private val photoLiveData = MutableLiveData<Photo>()
 
-    fun loadDataFromRepository(idPost: Int) {
+    fun loadData(idPost: Int) {
         viewModelScope.launch {
             photoLiveData.postValue(repository.getPhotoById(idPost.toString()))
         }

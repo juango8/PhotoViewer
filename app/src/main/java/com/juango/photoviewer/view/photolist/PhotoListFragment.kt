@@ -40,7 +40,7 @@ class PhotoListFragment : Fragment() {
     init {
         lifecycleScope.launchWhenStarted {
             val albumId = requireArguments().getInt(ARG_POSITION) + 1
-            viewModel.loadPhotoListFromRepository(albumId.toString())
+            viewModel.loadPhotoList(albumId.toString())
             loadPhotos()
         }
     }
