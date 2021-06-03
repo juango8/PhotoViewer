@@ -10,9 +10,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPhotoDetailBinding
 import com.juango.photoviewer.view.utils.setImageByGlide
 import com.juango.photoviewer.viewmodel.PhotoDetailViewModel
+import com.juango.photoviewer.viewmodel.PhotoDetailViewModelFactory
 import kotlinx.coroutines.launch
 
 class PhotoDetailFragment : Fragment() {
@@ -64,7 +66,8 @@ class PhotoDetailFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProvider(this).get(PhotoDetailViewModel::class.java)
+        val factory = PhotoDetailViewModelFactory(App.repository, this)
+        viewModel = ViewModelProvider(this, factory).get(PhotoDetailViewModel::class.java)
     }
 
     private fun shareImage() {

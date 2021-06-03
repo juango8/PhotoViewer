@@ -11,11 +11,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPhotoListBinding
 import com.juango.photoviewer.service.model.Photo
 import com.juango.photoviewer.view.viewpager.ViewPagerFragmentDirections
-
 import com.juango.photoviewer.viewmodel.PhotoListViewModel
+import com.juango.photoviewer.viewmodel.PhotoListViewModelFactory
 
 class PhotoListFragment : Fragment() {
 
@@ -72,7 +73,8 @@ class PhotoListFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProvider(this).get(PhotoListViewModel::class.java)
+        val factory = PhotoListViewModelFactory(App.repository, this)
+        viewModel = ViewModelProvider(this, factory).get(PhotoListViewModel::class.java)
     }
 
     private fun loadPhotos() {

@@ -1,17 +1,20 @@
 package com.juango.photoviewer.viewmodel
 
+import android.os.Bundle
 import androidx.lifecycle.*
-import com.juango.photoviewer.App
+import androidx.savedstate.SavedStateRegistryOwner
 import com.juango.photoviewer.service.model.relations.PhotoAndAlbum
+import com.juango.photoviewer.service.repository.PhotoViewerRepository
 import kotlinx.coroutines.launch
 
-class PhotoListViewModel(private val state: SavedStateHandle) : ViewModel() {
+class PhotoListViewModel(
+    private val state: SavedStateHandle,
+    private val repository: PhotoViewerRepository
+) : ViewModel() {
 
     companion object {
         private const val PHOTO_LIST_KEY = "photoList"
     }
-
-    private val repository by lazy { App.repository }
 
     private val photoListLiveData = MutableLiveData<List<PhotoAndAlbum>>()
 
@@ -30,5 +33,20 @@ class PhotoListViewModel(private val state: SavedStateHandle) : ViewModel() {
 
     fun saveState() {
         state.set(PHOTO_LIST_KEY, getPhotoListLiveData().value)
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+class PhotoListViewModelFactory(
+    private val repository: PhotoViewerRepository,
+    owner: SavedStateRegistryOwner,
+    defaultArgs: Bundle? = null
+) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
+    override fun <T : ViewModel> create(
+        key: String,
+        modelClass: Class<T>,
+        handle: SavedStateHandle
+    ): T {
+        return PhotoListViewModel(handle, repository) as T
     }
 }

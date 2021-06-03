@@ -1,19 +1,22 @@
 package com.juango.photoviewer.viewmodel
 
 import android.net.Uri
+import android.os.Bundle
 import androidx.lifecycle.*
-import com.juango.photoviewer.App
+import androidx.savedstate.SavedStateRegistryOwner
 import com.juango.photoviewer.service.model.Photo
+import com.juango.photoviewer.service.repository.PhotoViewerRepository
 import kotlinx.coroutines.launch
 
-class PhotoDetailViewModel(private val state: SavedStateHandle) : ViewModel() {
+class PhotoDetailViewModel(
+    private val state: SavedStateHandle,
+    private val repository: PhotoViewerRepository
+) : ViewModel() {
 
     companion object {
         private const val PHOTO_DETAIL_KEY = "photoDetail"
         const val FILE_AUTHORITY = "com.juango.photoviewer.fileprovider"
     }
-
-    private val repository by lazy { App.repository }
 
     private val photoLiveData = MutableLiveData<Photo>()
 
@@ -35,5 +38,20 @@ class PhotoDetailViewModel(private val state: SavedStateHandle) : ViewModel() {
 
     suspend fun createImageOnCache(): Uri {
         return repository.saveImageInCache(photoLiveData.value!!)
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+class PhotoDetailViewModelFactory(
+    private val repository: PhotoViewerRepository,
+    owner: SavedStateRegistryOwner,
+    defaultArgs: Bundle? = null
+) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
+    override fun <T : ViewModel> create(
+        key: String,
+        modelClass: Class<T>,
+        handle: SavedStateHandle
+    ): T {
+        return PhotoDetailViewModel(handle, repository) as T
     }
 }
