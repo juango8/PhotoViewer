@@ -26,9 +26,8 @@ class PhotoViewerRepositoryImpl(
     private val context: Context,
     private val photoDao: PhotoDao,
     private val albumDao: AlbumDao,
-    private val remoteApi: RemoteApi,
-
-    ) : PhotoViewerRepository {
+    private val remoteApi: RemoteApi
+) : PhotoViewerRepository {
 
     private val networkStatusChecker by lazy {
         NetworkStatusChecker(context.getSystemService(ConnectivityManager::class.java))
