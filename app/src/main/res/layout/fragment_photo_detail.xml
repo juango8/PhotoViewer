@@ -28,12 +28,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_half"
         android:layout_marginEnd="@dimen/padding_half"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="?colorOnPrimary"
         android:contentDescription="@string/share_content_description"
         android:src="@android:drawable/ic_menu_share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black" />
+        app:tint="?colorOnSecondary" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

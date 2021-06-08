@@ -28,7 +28,7 @@
             android:layout_height="@dimen/card_image_size"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/padding_half"
-            android:background="@color/teal_700"
+            android:background="?colorSecondaryVariant"
             android:contentDescription="@string/content_description_photo_image"
             android:scaleType="fitXY"
             tools:srcCompat="@drawable/ic_launcher_foreground" />
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:alpha=".9"
-            android:background="@color/purple_500"
+            android:background="?colorPrimary"
             android:orientation="horizontal">
 
             <TextView
@@ -50,7 +50,7 @@
                 android:gravity="center_horizontal"
                 android:maxLines="3"
                 android:padding="@dimen/padding_half"
-                android:textColor="@android:color/white"
+                android:textColor="?colorOnPrimary"
                 android:textSize="@dimen/photo_card_text_size"
                 android:textStyle="bold" />
 
