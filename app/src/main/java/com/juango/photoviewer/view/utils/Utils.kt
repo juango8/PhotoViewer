@@ -57,3 +57,11 @@ suspend fun getBitmapFromGlideURL(url: String, context: Context): Bitmap =
             R.drawable.ic_android_red
         )
     }
+
+fun getThemeFromPrefs(themeId: Int): Int {
+    return when (themeId) {
+        0 -> R.style.Theme_PhotoViewer
+        1 -> R.style.Theme_PhotoViewer1
+        else -> R.style.Theme_PhotoViewer
+    }
+}

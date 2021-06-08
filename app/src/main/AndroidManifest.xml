@@ -15,15 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoViewer"
         tools:ignore="AllowBackup">
+        <activity android:name=".view.PrefsActivity"></activity>
         <activity
-            android:name="com.juango.photoviewer.view.MainActivity"
-            android:theme="@style/Theme.PhotoViewer.NoActionBar">
+            android:name=".view.MainActivity"
+            android:theme="@style/Theme.PhotoViewer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.juango.photoviewer.fileprovider"
