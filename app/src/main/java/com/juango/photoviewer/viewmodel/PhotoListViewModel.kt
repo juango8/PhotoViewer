@@ -18,6 +18,13 @@ class PhotoListViewModel(
 
     private val photoListLiveData = MutableLiveData<List<PhotoAndAlbum>>()
 
+    init {
+        if (state.contains(PHOTO_LIST_KEY)) {
+            photoListLiveData.value =
+                state.getLiveData<List<PhotoAndAlbum>>(PHOTO_LIST_KEY).value
+        }
+    }
+
     fun loadPhotoList(albumId: String) {
         viewModelScope.launch {
             photoListLiveData.postValue(repository.getPhotosByAlbum(albumId))
@@ -25,10 +32,7 @@ class PhotoListViewModel(
     }
 
     fun getPhotoListLiveData(): LiveData<List<PhotoAndAlbum>> =
-        if (state.contains(PHOTO_LIST_KEY)) {
-            state.getLiveData(PHOTO_LIST_KEY)
-        } else
-            photoListLiveData
+        photoListLiveData
 
 
     fun saveState() {
