@@ -93,7 +93,7 @@ class PhotoListFragment : Fragment() {
         view?.let {
             val action =
                 ViewPagerFragmentDirections.actionPhotoListFragmentToPhotoDetailFragment(item.id)
-            navControllerSafeNavigate(action)
+            parentFragment?.navControllerSafeNavigate(action)
         }
     }
 }

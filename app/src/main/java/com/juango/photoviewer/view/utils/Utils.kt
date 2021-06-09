@@ -87,7 +87,7 @@ fun Fragment.navControllerSafeNavigate(
         is DialogFragmentNavigator.Destination -> destination.className
         else -> return
     }
-    if (parentFragment?.javaClass?.name == currentDestinationClassName || javaClass.name == currentDestinationClassName)
+    if (javaClass.name == currentDestinationClassName)
         navController.navigate(resId, args, navOptions, navigatorExtras)
 }
 
