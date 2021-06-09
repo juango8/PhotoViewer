@@ -36,10 +36,12 @@ class PrefsActivity : AppCompatActivity() {
         binding.imageViewDefaultTheme.setOnClickListener {
             Toast.makeText(this, "Theme changed", Toast.LENGTH_SHORT).show()
             Preferences.setTheme(this, 0)
+            recreate()
         }
         binding.imageViewChillTheme.setOnClickListener {
             Toast.makeText(this, "Theme changed", Toast.LENGTH_SHORT).show()
             Preferences.setTheme(this, 1)
+            recreate()
         }
     }
 
