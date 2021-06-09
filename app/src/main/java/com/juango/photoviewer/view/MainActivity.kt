@@ -4,23 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.juango.photoviewer.R
 import com.juango.photoviewer.databinding.ActivityMainBinding
-import com.juango.photoviewer.service.Preferences
-import com.juango.photoviewer.view.utils.getThemeFromPrefs
+import com.juango.photoviewer.view.utils.MyThemeAppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : MyThemeAppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(getThemeFromPrefs(Preferences.getTheme(this)))
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
