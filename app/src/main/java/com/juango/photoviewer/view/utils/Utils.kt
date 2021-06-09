@@ -3,7 +3,16 @@ package com.juango.photoviewer.view.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Bundle
 import android.widget.ImageView
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigator
+import androidx.navigation.fragment.DialogFragmentNavigator
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.model.GlideUrl
@@ -64,4 +73,33 @@ fun getThemeFromPrefs(themeId: Int): Int {
         1 -> R.style.Theme_PhotoViewer1
         else -> R.style.Theme_PhotoViewer
     }
+}
+
+fun Fragment.navControllerSafeNavigate(
+    @IdRes resId: Int,
+    args: Bundle? = null,
+    navOptions: NavOptions? = null,
+    navigatorExtras: Navigator.Extras? = null
+) {
+    val navController = findNavController()
+    val currentDestinationClassName = when (val destination = navController.currentDestination) {
+        is FragmentNavigator.Destination -> destination.className
+        is DialogFragmentNavigator.Destination -> destination.className
+        else -> return
+    }
+    if (parentFragment?.javaClass?.name == currentDestinationClassName || javaClass.name == currentDestinationClassName)
+        navController.navigate(resId, args, navOptions, navigatorExtras)
+}
+
+fun Fragment.navControllerSafeNavigate(
+    directions: NavDirections,
+    navOptions: NavOptions? = null,
+    navigatorExtras: Navigator.Extras? = null
+) {
+    navControllerSafeNavigate(
+        directions.actionId,
+        directions.arguments,
+        navOptions,
+        navigatorExtras
+    )
 }

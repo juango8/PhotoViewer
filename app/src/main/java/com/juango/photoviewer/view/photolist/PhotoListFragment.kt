@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPhotoListBinding
 import com.juango.photoviewer.service.model.Photo
+import com.juango.photoviewer.view.utils.navControllerSafeNavigate
 import com.juango.photoviewer.view.viewpager.ViewPagerFragmentDirections
 import com.juango.photoviewer.viewmodel.PhotoListViewModel
 import com.juango.photoviewer.viewmodel.PhotoListViewModelFactory
@@ -93,7 +93,7 @@ class PhotoListFragment : Fragment() {
         view?.let {
             val action =
                 ViewPagerFragmentDirections.actionPhotoListFragmentToPhotoDetailFragment(item.id)
-            NavHostFragment.findNavController(this).navigate(action)
+            navControllerSafeNavigate(action)
         }
     }
 }
