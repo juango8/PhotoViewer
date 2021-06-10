@@ -17,12 +17,12 @@ class ViewPagerFragment : Fragment() {
     private val onNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_home -> {
-                    binding.viewPager.setCurrentItem(0, false)
+                R.id.navigation_album1 -> {
+                    binding.viewPager.setCurrentItem(0, true)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.navigation_playlist -> {
-                    binding.viewPager.setCurrentItem(1, false)
+                R.id.navigation_album2 -> {
+                    binding.viewPager.setCurrentItem(1, true)
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -33,8 +33,8 @@ class ViewPagerFragment : Fragment() {
     private var onNavigationPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             when (position) {
-                0 -> binding.navigation.menu.findItem(R.id.navigation_home).isChecked = true
-                1 -> binding.navigation.menu.findItem(R.id.navigation_playlist).isChecked = true
+                0 -> binding.navigation.menu.findItem(R.id.navigation_album1).isChecked = true
+                1 -> binding.navigation.menu.findItem(R.id.navigation_album2).isChecked = true
             }
         }
     }
