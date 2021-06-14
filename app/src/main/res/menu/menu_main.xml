@@ -3,7 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/edit_preferences"
-        android:orderInCategory="100"
+        android:icon="@drawable/ic_dark_mode"
+        android:orderInCategory="200"
         android:title="@string/edit_preferences"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/go_to_post_list"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_dynamic_feed"
+        android:title="@string/post_list"
+        app:showAsAction="ifRoom" />
 </menu>
