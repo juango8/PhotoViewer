@@ -29,9 +29,6 @@
         <action
             android:id="@+id/action_viewPagerFragment_to_postListFragment"
             app:destination="@id/postListFragment" />
-        <action
-            android:id="@+id/action_viewPagerFragment_to_prefsActivity"
-            app:destination="@id/prefsActivity" />
     </fragment>
     <fragment
         android:id="@+id/postListFragment"
@@ -63,4 +60,8 @@
             android:defaultValue="0"
             app:argType="integer" />
     </fragment>
+    <action
+        android:id="@+id/action_global_prefsActivity"
+        app:destination="@id/prefsActivity" />
+
 </navigation>

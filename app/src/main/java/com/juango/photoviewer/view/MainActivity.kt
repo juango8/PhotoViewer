@@ -37,7 +37,7 @@ class MainActivity : MyThemeAppCompatActivity() {
         when (item.itemId) {
             R.id.edit_preferences -> {
                 findNavController(R.id.nav_host_fragment_content_main)
-                    .navigate(R.id.action_viewPagerFragment_to_prefsActivity)
+                    .navigate(R.id.action_global_prefsActivity)
             }
             R.id.go_to_post_list -> {
                 findNavController(R.id.nav_host_fragment_content_main)
