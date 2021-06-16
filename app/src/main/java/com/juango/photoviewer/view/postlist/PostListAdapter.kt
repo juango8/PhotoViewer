@@ -8,7 +8,7 @@ import com.juango.photoviewer.databinding.ListItemPostBinding
 import com.juango.photoviewer.service.model.Post
 
 class PostListAdapter(
-    private val onItemSelected: () -> Unit
+    private val onItemSelected: (Post) -> Unit
 ) : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: ListItemPostBinding) :
@@ -16,11 +16,11 @@ class PostListAdapter(
         private lateinit var post: Post
 
         @SuppressLint("SetTextI18n")
-        fun bind(post: Post, onItemSelected: () -> Unit) {
+        fun bind(post: Post, onItemSelected: (Post) -> Unit) {
             this.post = post
             binding.tvTitle.text = post.title
             binding.tvBody.text = "${post.body.substring(0, 60)}..."
-            binding.root.setOnClickListener { onItemSelected() }
+            binding.root.setOnClickListener { onItemSelected(post) }
 
         }
 
