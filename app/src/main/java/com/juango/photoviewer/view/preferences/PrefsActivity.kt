@@ -1,4 +1,4 @@
-package com.juango.photoviewer.view
+package com.juango.photoviewer.view.preferences
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.juango.photoviewer.R
 import com.juango.photoviewer.databinding.ActivityPrefsBinding
 import com.juango.photoviewer.service.Preferences
+import com.juango.photoviewer.view.MainActivity
 import com.juango.photoviewer.view.utils.MyThemeAppCompatActivity
 
 

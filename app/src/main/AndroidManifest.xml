@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoViewer"
         tools:ignore="AllowBackup">
-        <activity android:name=".view.PrefsActivity"></activity>
+        <activity android:name=".view.preferences.PrefsActivity" />
         <activity
             android:name=".view.MainActivity"
             android:theme="@style/Theme.PhotoViewer">
