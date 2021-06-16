@@ -20,17 +20,19 @@ class PhotoDetailViewModel(
 
     private val photoLiveData = MutableLiveData<Photo>()
 
-    fun loadData(idPost: Int) {
-        viewModelScope.launch {
-            photoLiveData.postValue(repository.getPhotoById(idPost.toString()))
+    init {
+        if (state.contains(PHOTO_DETAIL_KEY)) {
+            photoLiveData.value = state.getLiveData<Photo>(PHOTO_DETAIL_KEY).value
         }
     }
 
-    fun getPhotoLiveData(): LiveData<Photo> =
-        if (state.contains(PHOTO_DETAIL_KEY)) {
-            state.getLiveData(PHOTO_DETAIL_KEY)
-        } else
-            photoLiveData
+    fun loadData(idPhoto: Int) {
+        viewModelScope.launch {
+            photoLiveData.postValue(repository.getPhotoById(idPhoto.toString()))
+        }
+    }
+
+    fun getPhotoLiveData(): LiveData<Photo> = photoLiveData
 
     fun saveState() {
         state.set(PHOTO_DETAIL_KEY, getPhotoLiveData().value)
