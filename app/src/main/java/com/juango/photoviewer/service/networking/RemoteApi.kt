@@ -20,4 +20,19 @@ class RemoteApi(private val apiService: RemoteApiService) {
             Failure(error)
         }
 
+    suspend fun getPost(): Result<List<Post>> =
+        try {
+            val data = apiService.getPost()
+            Success(data)
+        } catch (error: Throwable) {
+            Failure(error)
+        }
+
+    suspend fun getDetailComments(postId: Int): Result<List<Comment>> =
+        try {
+            val data = apiService.getDetailComments(postId)
+            Success(data)
+        } catch (error: Throwable) {
+            Failure(error)
+        }
 }

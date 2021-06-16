@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 import com.juango.photoviewer.service.database.dao.AlbumDao
 import com.juango.photoviewer.service.database.dao.PhotoDao
 import com.juango.photoviewer.service.database.migrations.migration_1_2
+import com.juango.photoviewer.service.database.migrations.migration_2_3
 import com.juango.photoviewer.service.model.Album
 import com.juango.photoviewer.service.model.Photo
 
-const val DATABASE_VERSION = 2
+const val DATABASE_VERSION = 3
 
 @Database(
     entities = [Photo::class, Album::class],
@@ -28,6 +29,7 @@ abstract class PhotoViewerDatabase : RoomDatabase() {
                 DATABASE_NAME
             )
                 .addMigrations(migration_1_2)
+                .addMigrations(migration_2_3)
                 .build()
         }
     }
