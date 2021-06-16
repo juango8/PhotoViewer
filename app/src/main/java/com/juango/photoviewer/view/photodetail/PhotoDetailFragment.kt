@@ -25,7 +25,7 @@ class PhotoDetailFragment : Fragment() {
 
     init {
         lifecycleScope.launchWhenStarted {
-            viewModel.loadData(args.idPost)
+            viewModel.loadData(args.idPhoto)
         }
     }
 
