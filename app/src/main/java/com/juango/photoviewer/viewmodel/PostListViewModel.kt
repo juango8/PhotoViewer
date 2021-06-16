@@ -26,7 +26,7 @@ class PostListViewModel(
         }
     }
 
-    fun loadPostList() {
+    private fun loadPostList() {
         viewModelScope.launch {
             postListLiveData.postValue(repository.getPosts())
         }
