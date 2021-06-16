@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPostListBinding
+import com.juango.photoviewer.service.model.Post
 import com.juango.photoviewer.view.utils.navControllerSafeNavigate
 import com.juango.photoviewer.viewmodel.PostListViewModel
 import com.juango.photoviewer.viewmodel.PostListViewModelFactory
@@ -70,11 +71,10 @@ class PostListFragment : Fragment() {
         binding.pullToRefresh.isRefreshing = false
     }
 
-    private fun onItemSelected() {
+    private fun onItemSelected(item: Post) {
         view?.let {
-            // TODO("change action")
             val action =
-                PostListFragmentDirections.actionPostListFragmentToViewPagerFragment()
+                PostListFragmentDirections.actionPostListFragmentToPostDetailFragment(item.id)
             navControllerSafeNavigate(action)
         }
     }
