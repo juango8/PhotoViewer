@@ -20,6 +20,6 @@ interface RemoteApiService {
     suspend fun getPost(): List<Post>
 
     @GET("/comments")
-    suspend fun getDetailComments(@Query("postId") postId: Int): List<Comment>
+    suspend fun getDetailComments(@Query("postId") postId: String): List<Comment>
 
 }

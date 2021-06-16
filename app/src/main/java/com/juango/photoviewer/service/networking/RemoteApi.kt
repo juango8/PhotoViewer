@@ -28,7 +28,7 @@ class RemoteApi(private val apiService: RemoteApiService) {
             Failure(error)
         }
 
-    suspend fun getDetailComments(postId: Int): Result<List<Comment>> =
+    suspend fun getDetailComments(postId: String): Result<List<Comment>> =
         try {
             val data = apiService.getDetailComments(postId)
             Success(data)

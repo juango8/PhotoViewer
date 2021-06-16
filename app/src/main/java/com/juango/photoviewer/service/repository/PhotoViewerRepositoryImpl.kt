@@ -6,10 +6,10 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import androidx.core.content.FileProvider
 import com.juango.photoviewer.service.database.dao.AlbumDao
+import com.juango.photoviewer.service.database.dao.CommentDao
 import com.juango.photoviewer.service.database.dao.PhotoDao
-import com.juango.photoviewer.service.model.Album
-import com.juango.photoviewer.service.model.Photo
-import com.juango.photoviewer.service.model.Success
+import com.juango.photoviewer.service.database.dao.PostDao
+import com.juango.photoviewer.service.model.*
 import com.juango.photoviewer.service.model.relations.PhotoAndAlbum
 import com.juango.photoviewer.service.networking.NetworkStatusChecker
 import com.juango.photoviewer.service.networking.RemoteApi
@@ -26,6 +26,8 @@ class PhotoViewerRepositoryImpl(
     private val context: Context,
     private val photoDao: PhotoDao,
     private val albumDao: AlbumDao,
+    private val commentDao: CommentDao,
+    private val postDao: PostDao,
     private val remoteApi: RemoteApi
 ) : PhotoViewerRepository {
 
@@ -85,6 +87,32 @@ class PhotoViewerRepositoryImpl(
             }
         }
         return FileProvider.getUriForFile(context, FILE_AUTHORITY, file)
+    }
+
+    override suspend fun getPosts(): List<Post> {
+        if (networkStatusChecker.hasInternetConnection()) {
+            val result = remoteApi.getPost()
+            if (result is Success) {
+                result.data.forEach {
+                    postDao.addPost(it)
+                }
+            }
+        }
+        return postDao.getPost()
+    }
+
+    override suspend fun getPostById(postId: String): Post = postDao.getPostById(postId)
+
+    override suspend fun getCommentsByPostId(postId: String): List<Comment> {
+        if (networkStatusChecker.hasInternetConnection()) {
+            val result = remoteApi.getDetailComments(postId)
+            if (result is Success) {
+                result.data.forEach {
+                    commentDao.addComment(it)
+                }
+            }
+        }
+        return commentDao.getCommentsByPost(postId)
     }
 
 }

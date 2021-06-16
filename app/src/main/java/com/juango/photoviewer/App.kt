@@ -25,6 +25,8 @@ class App : Application() {
                 instance,
                 database.photoDao(),
                 database.albumDao(),
+                database.commentDao(),
+                database.postDao(),
                 remoteApi
             )
         }
