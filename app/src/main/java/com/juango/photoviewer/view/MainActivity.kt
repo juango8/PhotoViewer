@@ -1,6 +1,5 @@
 package com.juango.photoviewer.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -37,9 +36,12 @@ class MainActivity : MyThemeAppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.edit_preferences -> {
-                val intent = Intent(this@MainActivity, PrefsActivity::class.java)
-                startActivity(intent)
-                return true
+                findNavController(R.id.nav_host_fragment_content_main)
+                    .navigate(R.id.action_viewPagerFragment_to_prefsActivity)
+            }
+            R.id.go_to_post_list -> {
+                findNavController(R.id.nav_host_fragment_content_main)
+                    .navigate(R.id.action_viewPagerFragment_to_postListFragment)
             }
         }
         return super.onOptionsItemSelected(item)
