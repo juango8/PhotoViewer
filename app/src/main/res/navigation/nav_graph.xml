@@ -26,5 +26,25 @@
         <action
             android:id="@+id/action_photoListFragment_to_photoDetailFragment"
             app:destination="@id/photoDetailFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_postListFragment"
+            app:destination="@id/postListFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_prefsActivity"
+            app:destination="@id/prefsActivity" />
     </fragment>
+    <fragment
+        android:id="@+id/postListFragment"
+        android:name="com.juango.photoviewer.view.postlist.PostListFragment"
+        android:label="fragment_post_list"
+        tools:layout="@layout/fragment_post_list">
+        <action
+            android:id="@+id/action_postListFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/prefsActivity"
+        android:name="com.juango.photoviewer.view.preferences.PrefsActivity"
+        android:label="activity_prefs"
+        tools:layout="@layout/activity_prefs" />
 </navigation>
