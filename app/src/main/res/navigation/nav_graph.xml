@@ -14,14 +14,14 @@
             android:id="@+id/action_photoDetailFragment_to_photoListFragment"
             app:destination="@id/viewPagerFragment" />
         <argument
-            android:name="idPost"
+            android:name="idPhoto"
             android:defaultValue="0"
             app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
         android:name="com.juango.photoviewer.view.viewpager.ViewPagerFragment"
-        android:label="fragment_view_pager"
+        android:label="Photos by Album"
         tools:layout="@layout/fragment_view_pager">
         <action
             android:id="@+id/action_photoListFragment_to_photoDetailFragment"
@@ -36,15 +36,31 @@
     <fragment
         android:id="@+id/postListFragment"
         android:name="com.juango.photoviewer.view.postlist.PostListFragment"
-        android:label="fragment_post_list"
+        android:label="Posts"
         tools:layout="@layout/fragment_post_list">
         <action
             android:id="@+id/action_postListFragment_to_viewPagerFragment"
             app:destination="@id/viewPagerFragment" />
+        <action
+            android:id="@+id/action_postListFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
     </fragment>
     <activity
         android:id="@+id/prefsActivity"
         android:name="com.juango.photoviewer.view.preferences.PrefsActivity"
-        android:label="activity_prefs"
+        android:label="Preferences"
         tools:layout="@layout/activity_prefs" />
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="com.juango.photoviewer.view.postdetail.PostDetailFragment"
+        android:label="Post Detail"
+        tools:layout="@layout/fragment_post_detail">
+        <action
+            android:id="@+id/action_postDetailFragment_to_postListFragment"
+            app:destination="@id/postListFragment" />
+        <argument
+            android:name="idPost"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
 </navigation>
