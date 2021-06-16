@@ -10,4 +10,6 @@
     <string name="theme_2">Theme 2</string>
     <string name="default_theme">Default Theme</string>
     <string name="chill_theme">Chill Theme</string>
+    <string name="title_of_post">Title of Post</string>
+    <string name="content_of_post">Content</string>
 </resources>
