@@ -55,6 +55,7 @@
         <action
             android:id="@+id/action_postDetailFragment_to_postListFragment"
             app:destination="@id/postListFragment" />
+        <deepLink app:uri="myapp://photoviewer.com/postDetail/{idPost}" />
         <argument
             android:name="idPost"
             android:defaultValue="0"
