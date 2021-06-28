@@ -12,4 +12,6 @@
     <string name="chill_theme">Chill Theme</string>
     <string name="title_of_post">Title of Post</string>
     <string name="content_of_post">Content</string>
+    <string name="channel_name">CHANNEL_ID</string>
+    <string name="channel_description">CHANNEL_BODY</string>
 </resources>
