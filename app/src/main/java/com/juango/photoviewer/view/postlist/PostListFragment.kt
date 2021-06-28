@@ -74,7 +74,7 @@ class PostListFragment : Fragment() {
     private fun onItemSelected(item: Post) {
         view?.let {
             val action =
-                PostListFragmentDirections.actionPostListFragmentToPostDetailFragment(item.id)
+                PostListFragmentDirections.actionPostListFragmentToPostDetailFragment(item.id.toString())
             navControllerSafeNavigate(action)
         }
     }

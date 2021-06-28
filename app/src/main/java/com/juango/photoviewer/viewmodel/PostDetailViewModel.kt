@@ -18,9 +18,9 @@ class PostDetailViewModel(
 
     private val postLiveData = MutableLiveData<Post>()
 
-    fun loadPost(idPost: Int) {
+    fun loadPost(idPost: String) {
         viewModelScope.launch {
-            postLiveData.postValue(repository.getPostById(idPost.toString()))
+            postLiveData.postValue(repository.getPostById(idPost))
         }
     }
 
