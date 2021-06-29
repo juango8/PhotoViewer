@@ -36,22 +36,22 @@
             android:id="@+id/image_view_default_theme"
             android:layout_width="200dp"
             android:layout_height="200dp"
+            android:contentDescription="@string/default_theme"
             app:layout_constraintBottom_toTopOf="@+id/image_view_chill_theme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/default_theme"
             app:srcCompat="@drawable/default_theme" />
 
         <ImageView
             android:id="@+id/image_view_chill_theme"
             android:layout_width="200dp"
             android:layout_height="200dp"
+            android:contentDescription="@string/chill_theme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_view_default_theme"
-            android:contentDescription="@string/chill_theme"
             app:srcCompat="@drawable/theme_one" />
 
         <TextView

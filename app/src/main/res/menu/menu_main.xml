@@ -9,8 +9,8 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/go_to_post_list"
-        android:orderInCategory="100"
         android:icon="@drawable/ic_dynamic_feed"
+        android:orderInCategory="100"
         android:title="@string/post_list"
         app:showAsAction="ifRoom" />
 </menu>
