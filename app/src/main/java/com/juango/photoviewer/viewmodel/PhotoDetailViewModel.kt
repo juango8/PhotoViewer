@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.*
 import com.juango.photoviewer.service.model.Photo
-import com.juango.photoviewer.service.repository.PhotoViewerRepository
+import com.juango.photoviewer.service.repository.PhotoViewerRepositoryImpl
 import com.juango.photoviewer.view.utils.saveImageInCache
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class PhotoDetailViewModel @Inject
 constructor(
     private val state: SavedStateHandle,
-    private val repository: PhotoViewerRepository
+    private val repository: PhotoViewerRepositoryImpl
 ) : ViewModel() {
 
     companion object {

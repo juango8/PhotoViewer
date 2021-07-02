@@ -10,17 +10,13 @@ import com.juango.photoviewer.service.model.*
 import com.juango.photoviewer.service.model.relations.PhotoAndAlbum
 import com.juango.photoviewer.service.networking.NetworkStatusChecker
 import com.juango.photoviewer.service.networking.RemoteApi
-import com.juango.photoviewer.view.utils.getBitmapFromGlideURL
-import com.juango.photoviewer.viewmodel.PhotoDetailViewModel.Companion.FILE_AUTHORITY
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStream
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class PhotoViewerRepositoryImpl(
-    private val context: Context,
+@Singleton
+class PhotoViewerRepositoryImpl @Inject constructor(
+    @ApplicationContext context: Context,
     private val photoDao: PhotoDao,
     private val albumDao: AlbumDao,
     private val commentDao: CommentDao,
