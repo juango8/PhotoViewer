@@ -5,22 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPostListBinding
 import com.juango.photoviewer.service.model.Post
 import com.juango.photoviewer.view.utils.navControllerSafeNavigate
 import com.juango.photoviewer.viewmodel.PostListViewModel
-import com.juango.photoviewer.viewmodel.PostListViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PostListFragment : Fragment() {
 
     private lateinit var binding: FragmentPostListBinding
     private val adapter by lazy { PostListAdapter(::onItemSelected) }
-    private lateinit var viewModel: PostListViewModel
+    private val viewModel: PostListViewModel by viewModels()
 
     init {
         lifecycleScope.launchWhenStarted {
@@ -32,7 +32,6 @@ class PostListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        initViewModel()
         binding = FragmentPostListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,8 +42,7 @@ class PostListFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        if (::viewModel.isInitialized)
-            viewModel.saveState()
+        viewModel.saveState()
         super.onSaveInstanceState(outState)
     }
 
@@ -52,11 +50,6 @@ class PostListFragment : Fragment() {
         binding.pullToRefresh.setOnRefreshListener { loadPost() }
         binding.postRecyclerView.adapter = adapter
         binding.postRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-    }
-
-    private fun initViewModel() {
-        val factory = PostListViewModelFactory(App.repository, this)
-        viewModel = ViewModelProvider(this, factory).get(PostListViewModel::class.java)
     }
 
     private fun loadPost() {

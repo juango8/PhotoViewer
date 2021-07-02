@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPhotoListBinding
 import com.juango.photoviewer.service.model.Photo
 import com.juango.photoviewer.view.utils.navControllerSafeNavigate
 import com.juango.photoviewer.view.viewpager.ViewPagerFragmentDirections
 import com.juango.photoviewer.viewmodel.PhotoListViewModel
-import com.juango.photoviewer.viewmodel.PhotoListViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PhotoListFragment : Fragment() {
 
     companion object {
@@ -35,7 +35,7 @@ class PhotoListFragment : Fragment() {
 
     private lateinit var binding: FragmentPhotoListBinding
     private val adapter by lazy { PhotoListAdapter(::onItemSelected) }
-    private lateinit var viewModel: PhotoListViewModel
+    private val viewModel: PhotoListViewModel by viewModels()
 
     init {
         lifecycleScope.launchWhenStarted {
@@ -49,7 +49,6 @@ class PhotoListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        initViewModel()
         binding = FragmentPhotoListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -60,8 +59,7 @@ class PhotoListFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        if (::viewModel.isInitialized)
-            viewModel.saveState()
+        viewModel.saveState()
         super.onSaveInstanceState(outState)
     }
 
@@ -70,11 +68,6 @@ class PhotoListFragment : Fragment() {
         binding.photoRecyclerView.adapter = adapter
         binding.photoRecyclerView.layoutManager =
             GridLayoutManager(requireContext(), 2, LinearLayoutManager.VERTICAL, false)
-    }
-
-    private fun initViewModel() {
-        val factory = PhotoListViewModelFactory(App.repository, this)
-        viewModel = ViewModelProvider(this, factory).get(PhotoListViewModel::class.java)
     }
 
     private fun loadPhotos() {

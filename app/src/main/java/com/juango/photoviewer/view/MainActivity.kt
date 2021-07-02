@@ -10,7 +10,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.juango.photoviewer.R
 import com.juango.photoviewer.databinding.ActivityMainBinding
 import com.juango.photoviewer.view.utils.MyThemeAppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : MyThemeAppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

@@ -5,20 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPostDetailBinding
 import com.juango.photoviewer.viewmodel.PostDetailViewModel
-import com.juango.photoviewer.viewmodel.PostDetailViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PostDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentPostDetailBinding
     private val args: PostDetailFragmentArgs by navArgs()
-    private lateinit var viewModel: PostDetailViewModel
+    private val viewModel: PostDetailViewModel by viewModels()
 
     init {
         lifecycleScope.launchWhenStarted {
@@ -30,7 +30,6 @@ class PostDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        initViewModel()
         binding = FragmentPostDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,8 +40,7 @@ class PostDetailFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        if (::viewModel.isInitialized)
-            viewModel.saveState()
+        viewModel.saveState()
         super.onSaveInstanceState(outState)
     }
 
@@ -53,11 +51,6 @@ class PostDetailFragment : Fragment() {
                 binding.tvContentDetail.text = post.body
             }
         })
-    }
-
-    private fun initViewModel() {
-        val factory = PostDetailViewModelFactory(App.repository, this)
-        viewModel = ViewModelProvider(this, factory).get(PostDetailViewModel::class.java)
     }
 
 }

@@ -6,22 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.juango.photoviewer.App
 import com.juango.photoviewer.databinding.FragmentPhotoDetailBinding
 import com.juango.photoviewer.view.utils.setImageByGlide
 import com.juango.photoviewer.viewmodel.PhotoDetailViewModel
-import com.juango.photoviewer.viewmodel.PhotoDetailViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class PhotoDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentPhotoDetailBinding
     private val args: PhotoDetailFragmentArgs by navArgs()
-    private lateinit var viewModel: PhotoDetailViewModel
+    private val viewModel: PhotoDetailViewModel by viewModels()
 
     init {
         lifecycleScope.launchWhenStarted {
@@ -33,7 +33,6 @@ class PhotoDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        initViewModel()
         binding = FragmentPhotoDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -45,8 +44,7 @@ class PhotoDetailFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        if (::viewModel.isInitialized)
-            viewModel.saveState()
+        viewModel.saveState()
         super.onSaveInstanceState(outState)
     }
 
@@ -63,11 +61,6 @@ class PhotoDetailFragment : Fragment() {
         binding.imageButton.setOnClickListener {
             shareImage()
         }
-    }
-
-    private fun initViewModel() {
-        val factory = PhotoDetailViewModelFactory(App.repository, this)
-        viewModel = ViewModelProvider(this, factory).get(PhotoDetailViewModel::class.java)
     }
 
     private fun shareImage() {

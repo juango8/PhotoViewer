@@ -1,14 +1,16 @@
 package com.juango.photoviewer.viewmodel
 
 import android.net.Uri
-import android.os.Bundle
 import androidx.lifecycle.*
-import androidx.savedstate.SavedStateRegistryOwner
 import com.juango.photoviewer.service.model.Photo
 import com.juango.photoviewer.service.repository.PhotoViewerRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PhotoDetailViewModel(
+@HiltViewModel
+class PhotoDetailViewModel @Inject
+constructor(
     private val state: SavedStateHandle,
     private val repository: PhotoViewerRepository
 ) : ViewModel() {
@@ -40,20 +42,5 @@ class PhotoDetailViewModel(
 
     suspend fun createImageOnCache(): Uri {
         return repository.saveImageInCache(photoLiveData.value!!)
-    }
-}
-
-@Suppress("UNCHECKED_CAST")
-class PhotoDetailViewModelFactory(
-    private val repository: PhotoViewerRepository,
-    owner: SavedStateRegistryOwner,
-    defaultArgs: Bundle? = null
-) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
-    override fun <T : ViewModel> create(
-        key: String,
-        modelClass: Class<T>,
-        handle: SavedStateHandle
-    ): T {
-        return PhotoDetailViewModel(handle, repository) as T
     }
 }
