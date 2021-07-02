@@ -2,7 +2,7 @@ package com.juango.photoviewer.viewmodel
 
 import androidx.lifecycle.*
 import com.juango.photoviewer.service.model.Post
-import com.juango.photoviewer.service.repository.PhotoViewerRepositoryImpl
+import com.juango.photoviewer.service.repository.PhotoViewerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -10,7 +10,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PostDetailViewModel @Inject constructor(
     private val state: SavedStateHandle,
-    private val repository: PhotoViewerRepositoryImpl
+    private val repository: PhotoViewerRepository
 ) : ViewModel() {
 
     companion object {
