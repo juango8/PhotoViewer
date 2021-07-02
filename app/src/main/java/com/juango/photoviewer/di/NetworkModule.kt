@@ -1,11 +1,15 @@
 package com.juango.photoviewer.di
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.juango.photoviewer.service.networking.RemoteApi
 import com.juango.photoviewer.service.networking.RemoteApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -17,6 +21,19 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     private const val BASE_URL = "https://jsonplaceholder.typicode.com"
+
+    @Singleton
+    @Provides
+    fun provideIsInternetConnection(@ApplicationContext context: Context): Boolean {
+        val connectivityManager: ConnectivityManager =
+            context.getSystemService(ConnectivityManager::class.java)
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+    }
 
     @Singleton
     @Provides

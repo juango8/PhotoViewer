@@ -1,22 +1,17 @@
 package com.juango.photoviewer.service.repository
 
-import android.content.Context
-import android.net.ConnectivityManager
 import com.juango.photoviewer.service.database.dao.AlbumDao
 import com.juango.photoviewer.service.database.dao.CommentDao
 import com.juango.photoviewer.service.database.dao.PhotoDao
 import com.juango.photoviewer.service.database.dao.PostDao
 import com.juango.photoviewer.service.model.*
 import com.juango.photoviewer.service.model.relations.PhotoAndAlbum
-import com.juango.photoviewer.service.networking.NetworkStatusChecker
 import com.juango.photoviewer.service.networking.RemoteApi
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class PhotoViewerRepositoryImpl @Inject constructor(
-    @ApplicationContext context: Context,
     private val photoDao: PhotoDao,
     private val albumDao: AlbumDao,
     private val commentDao: CommentDao,
@@ -24,12 +19,11 @@ class PhotoViewerRepositoryImpl @Inject constructor(
     private val remoteApi: RemoteApi
 ) : PhotoViewerRepository {
 
-    private val networkStatusChecker by lazy {
-        NetworkStatusChecker(context.getSystemService(ConnectivityManager::class.java))
-    }
+    @set:Inject
+    var networkStatusChecker: Boolean = false
 
     override suspend fun getPhotos(albumId: String): List<Photo> {
-        if (networkStatusChecker.hasInternetConnection()) {
+        if (networkStatusChecker) {
             val result = remoteApi.getPhotos(albumId)
             if (result is Success) {
                 val firstTwentyFive = result.data.slice(0..24)
@@ -44,7 +38,7 @@ class PhotoViewerRepositoryImpl @Inject constructor(
     override suspend fun getPhotoById(photoId: String): Photo = photoDao.getPhotoById(photoId)
 
     override suspend fun getAlbums(): List<Album> {
-        if (networkStatusChecker.hasInternetConnection()) {
+        if (networkStatusChecker) {
             val result = remoteApi.getAlbums()
             if (result is Success) {
                 val onlyTwo = result.data.slice(0..1)
@@ -67,7 +61,7 @@ class PhotoViewerRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getPosts(): List<Post> {
-        if (networkStatusChecker.hasInternetConnection()) {
+        if (networkStatusChecker) {
             val result = remoteApi.getPost()
             if (result is Success) {
                 result.data.forEach {
@@ -81,7 +75,7 @@ class PhotoViewerRepositoryImpl @Inject constructor(
     override suspend fun getPostById(postId: String): Post = postDao.getPostById(postId)
 
     override suspend fun getCommentsByPostId(postId: String): List<Comment> {
-        if (networkStatusChecker.hasInternetConnection()) {
+        if (networkStatusChecker) {
             val result = remoteApi.getDetailComments(postId)
             if (result is Success) {
                 result.data.forEach {
