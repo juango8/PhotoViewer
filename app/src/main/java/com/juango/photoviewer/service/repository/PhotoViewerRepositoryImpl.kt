@@ -1,10 +1,7 @@
 package com.juango.photoviewer.service.repository
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.net.ConnectivityManager
-import android.net.Uri
-import androidx.core.content.FileProvider
 import com.juango.photoviewer.service.database.dao.AlbumDao
 import com.juango.photoviewer.service.database.dao.CommentDao
 import com.juango.photoviewer.service.database.dao.PhotoDao
@@ -71,22 +68,6 @@ class PhotoViewerRepositoryImpl(
 
             return photos.map { PhotoAndAlbum(it, photosByAlbum.album) }
         }
-    }
-
-    override suspend fun saveImageInCache(photo: Photo): Uri {
-        val bitmap = getBitmapFromGlideURL(photo.url, context)
-        val file = File(context.cacheDir.absolutePath, "test.jpg")
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val out: OutputStream = FileOutputStream(file)
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
-                out.flush()
-                out.close()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-        return FileProvider.getUriForFile(context, FILE_AUTHORITY, file)
     }
 
     override suspend fun getPosts(): List<Post> {

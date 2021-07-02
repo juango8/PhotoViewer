@@ -1,6 +1,5 @@
 package com.juango.photoviewer.service.repository
 
-import android.net.Uri
 import com.juango.photoviewer.service.model.Album
 import com.juango.photoviewer.service.model.Comment
 import com.juango.photoviewer.service.model.Photo
@@ -18,8 +17,6 @@ interface PhotoViewerRepository {
     suspend fun getAlbums(): List<Album>
 
     suspend fun getPhotosByAlbum(albumId: String): List<PhotoAndAlbum>
-
-    suspend fun saveImageInCache(photo: Photo): Uri
 
     suspend fun getPosts(): List<Post>
 

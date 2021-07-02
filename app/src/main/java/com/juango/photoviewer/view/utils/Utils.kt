@@ -3,9 +3,11 @@ package com.juango.photoviewer.view.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.annotation.IdRes
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
@@ -19,8 +21,12 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.request.RequestOptions
 import com.juango.photoviewer.R
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.juango.photoviewer.service.model.Photo
+import com.juango.photoviewer.viewmodel.PhotoDetailViewModel
+import kotlinx.coroutines.*
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 import java.util.concurrent.TimeUnit
 
 
@@ -66,6 +72,23 @@ suspend fun getBitmapFromGlideURL(url: String, context: Context): Bitmap =
             R.drawable.ic_android_red
         )
     }
+
+@DelicateCoroutinesApi
+suspend fun saveImageInCache(context: Context, photo: Photo): Uri {
+    val bitmap = getBitmapFromGlideURL(photo.url, context)
+    val file = File(context.cacheDir.absolutePath, "test.jpg")
+    GlobalScope.launch(Dispatchers.IO) {
+        try {
+            val out: OutputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+            out.flush()
+            out.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+    return FileProvider.getUriForFile(context, PhotoDetailViewModel.FILE_AUTHORITY, file)
+}
 
 fun getThemeFromPrefs(themeId: Int): Int {
     return when (themeId) {

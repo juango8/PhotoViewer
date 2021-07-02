@@ -14,6 +14,7 @@ import com.juango.photoviewer.databinding.FragmentPhotoDetailBinding
 import com.juango.photoviewer.view.utils.setImageByGlide
 import com.juango.photoviewer.viewmodel.PhotoDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -37,6 +38,7 @@ class PhotoDetailFragment : Fragment() {
         return binding.root
     }
 
+    @DelicateCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
@@ -57,15 +59,17 @@ class PhotoDetailFragment : Fragment() {
         })
     }
 
+    @DelicateCoroutinesApi
     private fun initListeners() {
         binding.imageButton.setOnClickListener {
             shareImage()
         }
     }
 
+    @DelicateCoroutinesApi
     private fun shareImage() {
         lifecycleScope.launch {
-            val uri = viewModel.createImageOnCache()
+            val uri = context?.let { viewModel.createImageOnCache(it) }
             uri.let {
                 val shareIntent = Intent()
                 shareIntent.action = Intent.ACTION_SEND

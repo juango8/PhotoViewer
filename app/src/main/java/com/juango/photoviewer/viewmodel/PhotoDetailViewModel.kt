@@ -1,10 +1,13 @@
 package com.juango.photoviewer.viewmodel
 
+import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.*
 import com.juango.photoviewer.service.model.Photo
 import com.juango.photoviewer.service.repository.PhotoViewerRepository
+import com.juango.photoviewer.view.utils.saveImageInCache
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,7 +43,8 @@ constructor(
         state.set(PHOTO_DETAIL_KEY, getPhotoLiveData().value)
     }
 
-    suspend fun createImageOnCache(): Uri {
-        return repository.saveImageInCache(photoLiveData.value!!)
+    @DelicateCoroutinesApi
+    suspend fun createImageOnCache(context: Context): Uri {
+        return saveImageInCache(context, photoLiveData.value!!)
     }
 }
